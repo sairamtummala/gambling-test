@@ -1,19 +1,13 @@
 import React from "react";
 import "./LandingPage.scss";
 
-import Modal from 'react-modal';
-
 import { connect } from "react-redux";
-
 
 import Progress from "../components/Progress";
 import BetsDataTable from "../components/BetsDataTable";
 import Shell from "../components/Shell";
 
-Modal.setAppElement('#modal-element')
-
 const LandingPage = () => {
-
   return (
     <>
       <div className="container">
@@ -23,13 +17,13 @@ const LandingPage = () => {
               <Progress />
             </div>
           </div>
-          
+
           <div className="col col-3">
             <div className="card h-100">
               <BetsDataTable />
             </div>
           </div>
-          
+
           <div className="col col-2">
             <div className="card h-100">
               <Shell />
@@ -42,8 +36,6 @@ const LandingPage = () => {
 };
 
 const mapState = state => ({});
-const mapProps = {
-  
-};
+const mapProps = {};
 const enhance = connect(mapState, mapProps);
 export default enhance(LandingPage);

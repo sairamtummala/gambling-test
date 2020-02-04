@@ -16,7 +16,6 @@ const App = () => {
             render={props => <DefaultLayout {...props} />}
           />
         </Switch>
-        <div id="modal-element"></div>
       </React.Suspense>
     </HashRouter>
   );
