@@ -97,14 +97,24 @@
       margin-bottom: 5px;
     }
     .amount {
-      font-weight: 600;
+      display: flex;
       svg {
         color: #FEC41C;
         margin-right: 10px;
       }
+      .amount-input {
+        background-color: #0A1A33;
+        outline: none;
+        border: none;
+        color: white;
+        font-weight: 600;
+        flex-grow: 1;
+        width: 100%;
+      }
     }
 
   }
+
   .sub-tag {
     background-color: #275E9A;
     width: 58px;
@@ -119,5 +129,11 @@
     border-top-right-radius: 8px;
     border-left: solid 1px gray;
 
+  }
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  &:focus-within {
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+    border-color: #80bdff;
+    border-radius: 8px;
   }
 }

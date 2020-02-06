@@ -3,11 +3,13 @@ import "./LandingPage.scss";
 
 import { connect } from "react-redux";
 
+
 import Progress from "../components/Progress";
 import BetsDataTable from "../components/BetsDataTable";
 import Shell from "../components/Shell";
 
 const LandingPage = () => {
+
   return (
     <>
       <div className="container">
@@ -17,13 +19,13 @@ const LandingPage = () => {
               <Progress />
             </div>
           </div>
-
+          
           <div className="col col-3">
             <div className="card h-100">
               <BetsDataTable />
             </div>
           </div>
-
+          
           <div className="col col-2">
             <div className="card h-100">
               <Shell />
@@ -36,6 +38,8 @@ const LandingPage = () => {
 };
 
 const mapState = state => ({});
-const mapProps = {};
+const mapProps = {
+  
+};
 const enhance = connect(mapState, mapProps);
 export default enhance(LandingPage);

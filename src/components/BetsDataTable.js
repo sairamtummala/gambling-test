@@ -22,7 +22,19 @@ const EXCHANGE_RATES = gql`
     }
   }
 `;
-
+const COMMENTS_SUBSCRIPTION = gql`
+  subscription onBetAdded($bet: BET!) {
+    betAdded(bet: $bet) {
+      id
+      time
+      name
+      game
+      bet
+      payout
+      profit
+    }
+  }
+`;
 const BetsDataTable = () => {
   const { data } = useQuery(EXCHANGE_RATES);
   
@@ -41,10 +53,10 @@ const BetsDataTable = () => {
           { data && data.bets.map((item, index)=>{
               return (
                 <tr key={index}>
-                  <td className="td-1">{(new Date(item.time)).toLocaleString()}</td>
+                  <td className="td-1">{(new Date(item.time)).toLocaleString("en-GB")}</td>
                   <td className="td-2 hide-mobile"><FontAwesomeIcon icon={faBitcoin} />{item.bet/1000}</td>
                   <td className="td-3 hide-mobile">x{item.payout/4}</td>
-                  <td className="td-4 "><FontAwesomeIcon icon={faBitcoin} />{item.profit/1000}</td>
+                  <td className={item.profit<0?"td-4 negative":"td-4"}><FontAwesomeIcon icon={faBitcoin} />{item.profit/1000}</td>
                 </tr>
               )
             })

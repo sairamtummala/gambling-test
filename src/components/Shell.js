@@ -12,9 +12,13 @@ import shellCap from '../assets/imgs/shell-cap.svg';
 const Shell = () => {
   
   const [modalOpen, setModalOpen] = useState(false);
+  const toggleModal = () => {
+    document.querySelector("body").classList.toggle("modal-open");
+    setModalOpen(!modalOpen);
+  }
   return (
     <>
-      <div className="shell" onClick={()=>setModalOpen(true)}>
+      <div className="shell" onClick={()=>toggleModal()}>
         <img src={shellCap} alt="" className="shell-cap"></img>
         <img src={shell} alt=""></img>
       </div>
@@ -26,7 +30,7 @@ const Shell = () => {
                 <FontAwesomeIcon icon={faExclamationTriangle} className="hide-mobile" style={{marginRight: "10px"}}/>
                 CONFIRM
               </div>
-              <FontAwesomeIcon icon={faTimes} onClick={()=>setModalOpen(false)}/>
+              <FontAwesomeIcon icon={faTimes} onClick={()=>toggleModal()}/>
             </div>
             <div className="modal-body">
               This is modal body
