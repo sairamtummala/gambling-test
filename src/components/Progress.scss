@@ -2,6 +2,9 @@
 .progress {
   display: flex;
   margin-bottom: 70px;
+  
+  width: 100%;
+  justify-content: center;
   .progress-label {
     display: flex;
     flex-direction: column;
@@ -136,4 +139,7 @@
     border-color: #80bdff;
     border-radius: 8px;
   }
+}
+.cursor {
+  cursor: pointer;
 }
