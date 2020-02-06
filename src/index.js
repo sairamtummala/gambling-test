@@ -6,22 +6,23 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { Provider } from "react-redux";
 import createStore from "./store/createStore";
-import ApolloClient from 'apollo-boost';
-import { ApolloProvider } from '@apollo/react-hooks';
 
-import { split } from 'apollo-link';
-import { HttpLink } from 'apollo-link-http';
-import { WebSocketLink } from 'apollo-link-ws';
-import { getMainDefinition } from 'apollo-utilities';
+import ApolloClient from "apollo-client";
+import { InMemoryCache } from "apollo-cache-inmemory";
+import { ApolloProvider } from "@apollo/react-hooks";
+import { split } from "apollo-link";
+import { HttpLink } from "apollo-link-http";
+import { WebSocketLink } from "apollo-link-ws";
+import { getMainDefinition } from "apollo-utilities";
 
 // Create an http link:
 const httpLink = new HttpLink({
-  uri: 'http://gambilife.com/graphql'
+  uri: "http://gambilife.com/graphql"
 });
 
 // Create a WebSocket link:
 const wsLink = new WebSocketLink({
-  uri: `ws://gambilife.com/`,
+  uri: `ws://gambilife.com/graphql`,
   options: {
     reconnect: true
   }
@@ -34,21 +35,20 @@ const link = split(
   ({ query }) => {
     const definition = getMainDefinition(query);
     return (
-      definition.kind === 'OperationDefinition' &&
-      definition.operation === 'subscription'
+      definition.kind === "OperationDefinition" &&
+      definition.operation === "subscription"
     );
   },
   wsLink,
-  httpLink,
+  httpLink
 );
 
 const client = new ApolloClient({
-  uri: 'http://gambilife.com/graphql',
+  cache: new InMemoryCache(),
+  link
 });
 const initialState = {};
 const store = createStore(initialState);
-
-console.log(client, link);
 
 const renderApp = () => {
   ReactDOM.render(
@@ -56,7 +56,6 @@ const renderApp = () => {
       <ApolloProvider client={client}>
         <App />
       </ApolloProvider>
-      
     </Provider>,
     document.getElementById("root")
   );
